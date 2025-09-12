@@ -1,3 +1,17 @@
-<h1> olá mundo</h1>
-<button>teste</button>
-<hr>
+<h2>Volume Total Diário por Porto e Sentido</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Data</th>
+        <th>Porto</th>
+        <th>Sentido</th>
+        <th>Volume Total (tons)</th>
+    </tr>
+    {% for row in dados %}
+    <tr>
+        <td>{{ row.data_chegada|date:"d/m/Y" }}</td>
+        <td>{{ row.porto }}</td>
+        <td>{{ row.sentido }}</td>
+        <td>{{ row.volume_total|floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+</table>

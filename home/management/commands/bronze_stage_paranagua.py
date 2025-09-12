@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from home.models import Navio
-from datetime import datetime
+from home.models import NavioBronze
 
 
 class Command(BaseCommand):
@@ -25,57 +24,52 @@ class Command(BaseCommand):
                     continue
                 primeira_coluna = colunas[0].text.strip()
 
-                if tabela.find('th',colspan="22").text == 'ATRACADOS':
+                if tabela.find("th", colspan="22").text == "ATRACADOS":
                     if primeira_coluna.isdigit():
-                        data_chegada_raw = colunas[14].text.strip()
+                        data_chegada = colunas[14].text.strip()
                         volume = colunas[18].text.strip()
                         produto = colunas[12].text.strip()
                         sentido = colunas[9].text.strip()
                     else:
-                        data_chegada_raw = colunas[6].text.strip()
+                        data_chegada = colunas[6].text.strip()
                         volume = colunas[10].text.strip()
                         produto = colunas[4].text.strip()
                         sentido = colunas[1].text.strip()
-                elif tabela.find('th',colspan="22").text == 'PROGRAMADOS':
+                elif tabela.find("th", colspan="22").text == "PROGRAMADOS":
                     if primeira_coluna.isdigit():
-                        data_chegada_raw = colunas[15].text.strip()
+                        data_chegada = colunas[15].text.strip()
                         volume = colunas[19].text.strip()
                         produto = colunas[14].text.strip()
                         sentido = colunas[11].text.strip()
                     else:
-                        data_chegada_raw = colunas[5].text.strip()
+                        data_chegada = colunas[5].text.strip()
                         volume = colunas[9].text.strip()
                         produto = colunas[4].text.strip()
                         sentido = colunas[1].text.strip()
-                elif tabela.find('th',colspan="22").text == 'AO LARGO':
+                elif tabela.find("th", colspan="22").text == "AO LARGO":
                     if primeira_coluna.isdigit():
-                        data_chegada_raw = colunas[13].text.strip()
+                        data_chegada = colunas[13].text.strip()
                         volume = colunas[16].text.strip()
                         produto = colunas[11].text.strip()
                         sentido = colunas[8].text.strip()
                     else:
-                        data_chegada_raw = colunas[5].text.strip()
+                        data_chegada = colunas[5].text.strip()
                         volume = colunas[8].text.strip()
                         produto = colunas[3].text.strip()
                         sentido = colunas[0].text.strip()
-                elif tabela.find('th',colspan="22").text == 'DESPACHADOS':
+                elif tabela.find("th", colspan="22").text == "DESPACHADOS":
                     if primeira_coluna.isdigit():
-                        data_chegada_raw = colunas[13].text.strip()
+                        data_chegada = colunas[13].text.strip()
                         volume = colunas[17].text.strip()
                         produto = colunas[12].text.strip()
                         sentido = colunas[9].text.strip()
                 else:
-                    data_chegada_raw = colunas[5].text.strip()
+                    data_chegada = colunas[5].text.strip()
                     volume = colunas[9].text.strip()
                     produto = colunas[4].text.strip()
                     sentido = colunas[1].text.strip()
-                
-                try:            
-                    data_chegada = datetime.strptime(data_chegada_raw, "%d/%m/%Y %H:%M")
-                except ValueError:
-                    data_chegada = None
 
-                Navio.objects.create(
+                NavioBronze.objects.create(
                     data_chegada=data_chegada,
                     volume=volume,
                     produto=produto,

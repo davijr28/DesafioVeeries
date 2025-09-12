@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from home.models import Navio
-from datetime import datetime
+from home.models import NavioBronze
 
 
 class Command(BaseCommand):
@@ -23,17 +22,12 @@ class Command(BaseCommand):
                 if not colunas:
                     continue
 
-                data_chegada_raw = colunas[4].text.strip()
+                data_chegada = colunas[4].text.strip()
                 volume = colunas[9].text.strip()
                 produto = colunas[8].text.strip()
                 sentido = colunas[7].text.strip()
 
-                try:
-                    data_chegada = datetime.strptime(data_chegada_raw, "%d/%m/%Y %H:%M")
-                except ValueError:
-                    data_chegada = None
-
-                Navio.objects.create(
+                NavioBronze.objects.create(
                     data_chegada=data_chegada,
                     volume=volume,
                     produto=produto,
