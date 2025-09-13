@@ -2,13 +2,15 @@
 <table border="1" cellpadding="5">
     <tr>
         <th>Data</th>
+        <th>Produto</th>
         <th>Porto</th>
         <th>Sentido</th>
-        <th>Volume Total (tons)</th>
+        <th>Volume Total Previsto (Tons)</th>
     </tr>
     {% for row in dados %}
     <tr>
         <td>{{ row.data_chegada|date:"d/m/Y" }}</td>
+        <td>{{ row.produto }}</td>
         <td>{{ row.porto }}</td>
         <td>{{ row.sentido }}</td>
         <td>{{ row.volume_total|floatformat:2 }}</td>

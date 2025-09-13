@@ -10,8 +10,8 @@ def home(request):
 
 def gold_volume_diario(request):
     dados = (
-        NavioSilver.objects.values("data_chegada", "porto", "sentido")
+        NavioSilver.objects.values("data_chegada", "produto", "porto", "sentido")
         .annotate(volume_total=Sum("volume"))
-        .order_by("data_chegada", "porto", "sentido")
+        .order_by("-data_chegada", "porto", "produto", "sentido")
     )
     return render(request, "app.html", {"dados": dados})

@@ -23,8 +23,8 @@ class Command(BaseCommand):
                     continue
 
                 data_chegada = colunas[4].text.strip()
-                volume = colunas[9].text.strip()
-                produto = colunas[8].text.strip()
+                volume = colunas[9].decode_contents()
+                produto = colunas[8].decode_contents()
                 sentido = colunas[7].text.strip()
 
                 NavioBronze.objects.create(
@@ -34,5 +34,4 @@ class Command(BaseCommand):
                     sentido=sentido,
                     porto="Porto de Santos",
                 )
-
         self.stdout.write(self.style.SUCCESS("Importação concluída!"))
