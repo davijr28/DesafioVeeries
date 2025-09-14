@@ -8,6 +8,7 @@ def home(request):
 
 
 def gold_volume_diario(request):
+    
     hoje = now().astimezone().date()
 
     dados = NavioSilver.objects.filter(data_chegada__date__lte=hoje).order_by(

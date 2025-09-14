@@ -7,7 +7,6 @@ class NavioBronze(models.Model):
     produto = models.CharField(max_length=200)
     sentido = models.CharField(max_length=50)
     porto = models.CharField(max_length=50)
-    data_importacao = models.DateTimeField(auto_now_add=True)
 
 
 class NavioSilver(models.Model):
@@ -16,4 +15,3 @@ class NavioSilver(models.Model):
     produto = models.CharField(max_length=200)
     sentido = models.CharField(max_length=50)
     porto = models.CharField(max_length=50)
-    data_importacao = models.DateTimeField(auto_now_add=True)

@@ -73,11 +73,20 @@ class Command(BaseCommand):
                         produto = colunas[4].text.strip()
                         sentido = colunas[1].text.strip()
                 if match:
-                    NavioBronze.objects.create(
+                    existe = NavioBronze.objects.filter(
                         data_chegada=data_chegada,
                         volume=volume,
                         produto=produto,
                         sentido=sentido,
                         porto="Porto de Paranaguá",
-                    )
+                    ).exists()
+
+                    if not existe:
+                        NavioBronze.objects.create(
+                            data_chegada=data_chegada,
+                            volume=volume,
+                            produto=produto,
+                            sentido=sentido,
+                            porto="Porto de Paranaguá",
+                        )
         self.stdout.write(self.style.SUCCESS("Importação concluída!"))
