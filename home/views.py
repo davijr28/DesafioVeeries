@@ -1,7 +1,8 @@
-from django.shortcuts import render
 from django.db.models import Sum
+from django.utils.timezone import now
+from django.shortcuts import render
 from home.models import NavioSilver
-from django.urls import reverse
+from datetime import timedelta
 
 
 def home(request):
@@ -9,9 +10,33 @@ def home(request):
 
 
 def gold_volume_diario(request):
+    hoje = now().astimezone().date()
+
     dados = (
-        NavioSilver.objects.values("data_chegada", "produto", "porto", "sentido")
+        NavioSilver.objects.filter(data_chegada__date__lte=hoje)
+        .values("data_chegada", "produto", "porto", "sentido")
         .annotate(volume_total=Sum("volume"))
         .order_by("-data_chegada", "porto", "produto", "sentido")
     )
-    return render(request, "app.html", {"dados": dados})
+
+    santos = [d for d in dados if d["porto"] == "Porto de Santos"]
+    paranagua = [d for d in dados if d["porto"] == "Porto de Paranaguá"]
+
+    volume_santos = sum(
+        d["volume_total"] for d in santos if d["data_chegada"].date() == hoje
+    )
+    volume_paranagua = sum(
+        d["volume_total"] for d in paranagua if d["data_chegada"].date() == hoje
+    )
+
+    return render(
+        request,
+        "app.html",
+        {
+            "hoje": hoje,
+            "santos": santos,
+            "paranagua": paranagua,
+            "volume_santos": volume_santos,
+            "volume_paranagua": volume_paranagua,
+        },
+    )

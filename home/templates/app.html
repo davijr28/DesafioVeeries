@@ -1,19 +1,167 @@
-<h2>Volume Total Diário por Porto e Sentido</h2>
-<table border="1" cellpadding="5">
-    <tr>
-        <th>Data</th>
-        <th>Produto</th>
-        <th>Porto</th>
-        <th>Sentido</th>
-        <th>Volume Total Previsto (Tons)</th>
-    </tr>
-    {% for row in dados %}
-    <tr>
-        <td>{{ row.data_chegada|date:"d/m/Y" }}</td>
-        <td>{{ row.produto }}</td>
-        <td>{{ row.porto }}</td>
-        <td>{{ row.sentido }}</td>
-        <td>{{ row.volume_total|floatformat:2 }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Portos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .menu button {
+            font-size: 1.5em;
+            padding: 15px 30px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .menu button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            font-size: 2em;
+            font-family: Georgia, serif;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .volume-info {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #666;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        .btn-voltar {
+            display: block;
+            margin: 30px auto;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-voltar:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+    <script>
+        function mostrarTabela(porto) {
+            document.getElementById("menu").style.display = "none";
+            document.getElementById("tabela-" + porto).style.display = "block";
+        }
+
+        function voltarMenu() {
+            document.getElementById("menu").style.display = "block";
+            document.getElementById("tabela-santos").style.display = "none";
+            document.getElementById("tabela-paranagua").style.display = "none";
+        }
+    </script>
+</head>
+
+<body>
+    <div id="menu" class="menu">
+        <h1>Escolha o Porto</h1>
+        <button onclick="mostrarTabela('santos')">Porto de Santos</button>
+        <button onclick="mostrarTabela('paranagua')">Porto de Paranaguá</button>
+    </div>
+
+    <div id="tabela-santos" style="display:none;">
+        <h2>Porto de Santos</h2>
+        <p class="volume-info">
+            Volume Diário Transportado ({{ hoje|date:"d/m/Y" }}):
+            {{ volume_santos }} Toneladas.
+        </p>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Produto</th>
+                <th>Sentido</th>
+                <th>Volume</th>
+            </tr>
+            {% for item in santos %}
+            <tr>
+                <td>{{ item.data_chegada|date:"d/m/Y" }}</td>
+                <td>{{ item.produto }}</td>
+                <td>{{ item.sentido }}</td>
+                <td>{{ item.volume_total }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum registro encontrado.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <div id="tabela-paranagua" style="display:none;">
+        <h2>Porto de Paranaguá</h2>
+        <p class="volume-info">
+            Volume Diário Transportado ({{ hoje|date:"d/m/Y" }}):
+            {{ volume_paranagua }} Toneladas.
+        </p>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Produto</th>
+                <th>Sentido</th>
+                <th>Volume</th>
+            </tr>
+            {% for item in paranagua %}
+            <tr>
+                <td>{{ item.data_chegada|date:"d/m/Y" }}</td>
+                <td>{{ item.produto }}</td>
+                <td>{{ item.sentido }}</td>
+                <td>{{ item.volume_total }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum registro encontrado.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
+    </div>
+</body>
+
+</html>

@@ -1,4 +1,67 @@
-<h1>Bem-vindo ao Dashboard de Portos</h1>
-<ul>
-    <li><a href="{% url 'gold_volume_diario' %}">Volume Diário por Porto</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Portos</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .menu-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-links li {
+            margin: 20px 0;
+        }
+
+        .menu-links a {
+            display: inline-block;
+            padding: 20px 40px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-family: inherit;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .menu-links a:hover {
+            background-color: #2980b9;
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bem-vindo ao Dashboard de Portos</h1>
+    <nav>
+        <ul class="menu-links">
+            <li>
+                <a href="{% url 'gold_volume_diario' %}">📊 Volume Diário por Porto</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+
+</html>

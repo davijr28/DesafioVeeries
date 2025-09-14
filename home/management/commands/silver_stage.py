@@ -49,7 +49,6 @@ def limpar_produto(produto_str: str) -> str:
         return produto_str.split("<br/>")[0].strip()
 
 
-
 class Command(BaseCommand):
     help = "Transforma dados da tabela Bronze em Silver"
 
