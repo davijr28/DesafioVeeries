@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 30px;
+            position: relative;
         }
 
         h1 {
@@ -50,6 +51,7 @@
             margin: 0 auto;
             border-collapse: collapse;
             width: 80%;
+            position: relative;
         }
 
         table,
@@ -66,6 +68,39 @@
 
         td {
             padding: 8px;
+        }
+
+        .btn-voltar-topo {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .btn-voltar-topo:hover {
+            background-color: #1e7e34;
+        }
+
+        .btn-topo {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 1em;
+            padding: 8px 15px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-topo:hover {
+            background-color: #e0a800;
         }
 
         .btn-voltar {
@@ -95,6 +130,10 @@
             document.getElementById("tabela-santos").style.display = "none";
             document.getElementById("tabela-paranagua").style.display = "none";
         }
+
+        function voltarParaTopo() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </head>
 
@@ -106,6 +145,8 @@
     </div>
 
     <div id="tabela-santos" style="display:none;">
+        <button class="btn-voltar-topo" onclick="voltarMenu()">Voltar ao Menu</button>
+
         <h2>Porto de Santos</h2>
         <p class="volume-info">
             Volume Diário Transportado ({{ hoje|date:"d/m/Y" }}):
@@ -116,14 +157,14 @@
                 <th>Data</th>
                 <th>Produto</th>
                 <th>Sentido</th>
-                <th>Volume</th>
+                <th>Volume(Tons.)</th>
             </tr>
             {% for item in santos %}
             <tr>
                 <td>{{ item.data_chegada|date:"d/m/Y" }}</td>
                 <td>{{ item.produto }}</td>
                 <td>{{ item.sentido }}</td>
-                <td>{{ item.volume_total }}</td>
+                <td>{{ item.volume }}</td>
             </tr>
             {% empty %}
             <tr>
@@ -131,10 +172,14 @@
             </tr>
             {% endfor %}
         </table>
+        <button class="btn-topo" onclick="voltarParaTopo()">Voltar<br/>para o<br/>topo ↑</button>
+
         <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
     </div>
 
     <div id="tabela-paranagua" style="display:none;">
+        <button class="btn-voltar-topo" onclick="voltarMenu()">Voltar ao Menu</button>
+
         <h2>Porto de Paranaguá</h2>
         <p class="volume-info">
             Volume Diário Transportado ({{ hoje|date:"d/m/Y" }}):
@@ -145,14 +190,14 @@
                 <th>Data</th>
                 <th>Produto</th>
                 <th>Sentido</th>
-                <th>Volume</th>
+                <th>Volume(Tons.)</th>
             </tr>
             {% for item in paranagua %}
             <tr>
                 <td>{{ item.data_chegada|date:"d/m/Y" }}</td>
                 <td>{{ item.produto }}</td>
                 <td>{{ item.sentido }}</td>
-                <td>{{ item.volume_total }}</td>
+                <td>{{ item.volume }}</td>
             </tr>
             {% empty %}
             <tr>
@@ -160,6 +205,8 @@
             </tr>
             {% endfor %}
         </table>
+        <button class="btn-topo" onclick="voltarParaTopo()">Voltar<br/>para o<br/>topo ↑</button>
+
         <button class="btn-voltar" onclick="voltarMenu()">Voltar</button>
     </div>
 </body>
