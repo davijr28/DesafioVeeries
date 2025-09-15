@@ -25,5 +25,5 @@ RUN touch /var/log/daily_job.log
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Rodar entrypoint (loop infinito que substitui o cron)
+# Rodar entrypoint
 CMD ["/entrypoint.sh"]
