@@ -21,7 +21,7 @@ run_stages
 while true; do
     HORA=$(date +%H:%M)  # horário do container 
     
-    if [ "$HORA" == "01:26" ]; then
+    if [ "$HORA" == "12:59" ]; then
         run_stages
         # Espera 61 segundos para não rodar duas vezes no mesmo minuto
         sleep 61
