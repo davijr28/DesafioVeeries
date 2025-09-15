@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    container_name: django_app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - ./db:/app/db
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=DesafioVeeries.settings
+    restart: always
+
+  daily_cron:
+    build: .
+    container_name: daily_cron_job
+    volumes:
+      - .:/app
+      - ./db:/app/db
+    restart: always

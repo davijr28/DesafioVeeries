@@ -2,11 +2,12 @@ from django.utils.timezone import now
 from django.shortcuts import render
 from home.models import NavioSilver
 
-
+# Função para renderizar página inicial da aplicação
 def home(request):
     return render(request, "home.html")
 
 
+# Função para exibir o volume diário dos portos
 def gold_volume_diario(request):
     
     hoje = now().astimezone().date()

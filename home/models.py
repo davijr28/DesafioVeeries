@@ -15,3 +15,4 @@ class NavioSilver(models.Model):
     produto = models.CharField(max_length=200)
     sentido = models.CharField(max_length=50)
     porto = models.CharField(max_length=50)
+    

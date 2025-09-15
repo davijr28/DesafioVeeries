@@ -4,29 +4,43 @@ from django.core.management.base import BaseCommand
 from home.models import NavioBronze
 
 
+# Definição de comando personalizado para importar dados do porto
 class Command(BaseCommand):
     help = "Importa dados de navios esperados do Porto de Paranaguá"
 
     def handle(self, *args, **kwargs):
         url = "https://www.appaweb.appa.pr.gov.br/appaweb/pesquisa.aspx?WCI=relLineUpRetroativo"
         page = requests.get(url)
+        # Analisa o conteúdo HTML da página
         soup = BeautifulSoup(page.text, "html.parser")
 
+        # Encontra todas as tabelas com o filtro especificado
         tabelas = soup.find_all(
             "table", class_="table table-bordered table-striped table-hover"
         )
 
+        # Itera sobre cada tabela
         for tabela in tabelas:
             linhas = tabela.find_all("tr")
+
+            # Itera sobre cada linha da tabela
             for linha in linhas:
                 colunas = linha.find_all("td")
                 if not colunas:
                     continue
+
+                # Extrai o conteúdo da primeira coluna
                 primeira_coluna = colunas[0].text.strip()
                 match = False
+
+                # Verifica o nome da tabela de dados
                 if tabela.find("th", colspan="22").text == "ATRACADOS":
                     match = True
+
+                    # Verifica se o primeiro valor é ccorrespondente ao número da linha na tabela
                     if primeira_coluna.isdigit():
+
+                        # Coleta os dados do navio
                         data_chegada = colunas[14].text.strip()
                         volume = colunas[18].text.strip()
                         produto = colunas[12].text.strip()
@@ -72,6 +86,8 @@ class Command(BaseCommand):
                         volume = colunas[9].text.strip()
                         produto = colunas[4].text.strip()
                         sentido = colunas[1].text.strip()
+
+                # Verifica se o nome da tabela corresponde
                 if match:
                     existe = NavioBronze.objects.filter(
                         data_chegada=data_chegada,
@@ -81,6 +97,7 @@ class Command(BaseCommand):
                         porto="Porto de Paranaguá",
                     ).exists()
 
+                    # Verifica se o valor do objeto já está armazenado, caso contrário, cria um novo objeto
                     if not existe:
                         NavioBronze.objects.create(
                             data_chegada=data_chegada,
@@ -89,4 +106,6 @@ class Command(BaseCommand):
                             sentido=sentido,
                             porto="Porto de Paranaguá",
                         )
+
+        # Exibe mensagem de sucesso no terminal
         self.stdout.write(self.style.SUCCESS("Importação concluída!"))
