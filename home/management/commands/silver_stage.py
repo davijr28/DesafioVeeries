@@ -54,7 +54,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for navio in NavioBronze.objects.all():
-            NavioSilver.objects.create(
+            NavioSilver.objects.get_or_create(
                 data_chegada=limpar_data(navio.data_chegada),
                 volume=limpar_volume(navio.volume),
                 produto=limpar_produto(navio.produto),

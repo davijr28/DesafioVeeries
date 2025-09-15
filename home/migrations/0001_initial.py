@@ -7,32 +7,48 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='NavioBronze',
+            name="NavioBronze",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('data_chegada', models.CharField(blank=True, max_length=100, null=True)),
-                ('volume', models.CharField(max_length=100)),
-                ('produto', models.CharField(max_length=200)),
-                ('sentido', models.CharField(max_length=50)),
-                ('porto', models.CharField(max_length=50)),
-                ('data_importacao', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "data_chegada",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                ("volume", models.CharField(max_length=100)),
+                ("produto", models.CharField(max_length=200)),
+                ("sentido", models.CharField(max_length=50)),
+                ("porto", models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='NavioSilver',
+            name="NavioSilver",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('data_chegada', models.DateTimeField(blank=True, null=True)),
-                ('volume', models.DecimalField(decimal_places=2, max_digits=50)),
-                ('produto', models.CharField(max_length=200)),
-                ('sentido', models.CharField(max_length=50)),
-                ('porto', models.CharField(max_length=50)),
-                ('data_importacao', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("data_chegada", models.DateTimeField(blank=True, null=True)),
+                ("volume", models.DecimalField(decimal_places=2, max_digits=50)),
+                ("produto", models.CharField(max_length=200)),
+                ("sentido", models.CharField(max_length=50)),
+                ("porto", models.CharField(max_length=50)),
             ],
         ),
     ]
