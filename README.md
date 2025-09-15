@@ -56,14 +56,15 @@ O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, pro
 1. Build do container:
 ```bash
 docker compose build
+```
 Rodar o projeto com atualização automática diária:
 
-bash
-Copiar código
+```bash
 docker compose up
+```
 Ao iniciar, o container executa automaticamente os stages Bronze, Silver e Gold, mantendo o histórico dos dados atualizado diariamente.
 
-Validação e Qualidade dos Dados:
+## Validação e Qualidade dos Dados:
 Os dados já são validados nos scripts antes de serem inseridos no banco.
 
 Dados incompletos ou ausentes são registrados como None.
@@ -71,23 +72,23 @@ Dados incompletos ou ausentes são registrados como None.
 Histórico é preservado em todas as camadas da arquitetura.
 
 
-Dicionários de Dados:
+## Dicionários de Dados:
 Os dados coletados já são padronizados e explicados nas tabelas. A seguir, um resumo das principais colunas e seus valores possíveis:
 
-Data: data de chegada do navio no porto.
+- Data: data de chegada do navio no porto.
 
-Produto: nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
+- Produto: nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
 
-Sentido: indica se a operação é Exportação, Importação ou Importação/Exportação.
+- Sentido: indica se a operação é Exportação, Importação ou Importação/Exportação.
 
-Volume: quantidade do produto transportada pelo navio no dia, em unidade padronizada(toneladas).
+- Volume: quantidade do produto transportada pelo navio no dia, em unidade padronizada(toneladas).
 
-Volume Diário Transportado: o total de carga transportada no dia.
+- Volume Diário Transportado: o total de carga transportada no dia.
 
-Porto: Porto de movimentação, atualmente limitado a Paranaguá ou Santos.
+- Porto: Porto de movimentação, atualmente limitado a Paranaguá ou Santos.
 
 
-Ideias Futuras:
+## Ideias Futuras:
 Melhorar alertas e notificações para inconsistências ou falhas na coleta de dados.
 
 Expandir para outros portos ou fontes de dados.
@@ -96,5 +97,5 @@ Adicionar novas métricas ou visualizações nas tabelas existente.
 
 Expandir relatórios diários.
 
-Autor:
+## Autor:
 Davi Jordani Ramos
