@@ -97,5 +97,4 @@ Adicionar novas métricas ou visualizações nas tabelas existente.
 
 Expandir relatórios diários.
 
-## Autor:
-## Davi Jordani Ramos
+## Autor: Davi Jordani Ramos
