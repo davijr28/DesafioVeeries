@@ -57,9 +57,20 @@ def limpar_sentido(sentido_str):
 def limpar_produto(produto_str: str) -> str:
 
     # Verifica se a parte da string está vazia e retorna a parte não vazia
-    if produto_str.split("<br/>")[0].strip() == "":
-        return produto_str.split("<br/>")[1]
-    else:
+    try:
+        if produto_str.split("<br/>")[0].strip() == "":
+            return produto_str.split("<br/>")[1].strip()
+        elif produto_str.split("<br/>")[1].strip() == "":
+            return produto_str.split("<br/>")[0].strip()
+        # Verifica se os nomes são iguais, caso contrário, retorna os dois
+        elif (
+            produto_str.split("<br/>")[0].strip()
+            != produto_str.split("<br/>")[1].strip()
+        ):
+            return f"{produto_str.split('<br/>')[0].strip()}, {produto_str.split('<br/>')[1].strip()}"
+        else:
+            return produto_str.split("<br/>")[0].strip()
+    except IndexError:
         return produto_str.split("<br/>")[0].strip()
 
 
