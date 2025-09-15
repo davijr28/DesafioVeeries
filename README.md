@@ -75,17 +75,17 @@ Histórico é preservado em todas as camadas da arquitetura.
 ## Dicionários de Dados:
 Os dados coletados já são padronizados e explicados nas tabelas. A seguir, um resumo das principais colunas e seus valores possíveis:
 
-- Data: data de chegada do navio no porto.
+**- Data:** data de chegada do navio no porto.
 
-- Produto: nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
+**- Produto:** nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
 
-- Sentido: indica se a operação é Exportação, Importação ou Importação/Exportação.
+**- Sentido:** indica se a operação é de Importação, Exportação ou Importação/Exportação.
 
-- Volume: quantidade do produto transportada pelo navio no dia, em unidade padronizada(toneladas).
+**- Volume:** quantidade do produto transportada pelo navio no dia, em unidade padronizada(toneladas).
 
-- Volume Diário Transportado: o total de carga transportada no dia.
+**- Volume Diário Transportado:** o total de carga transportada no dia.
 
-- Porto: Porto de movimentação, atualmente limitado a Paranaguá ou Santos.
+**- Porto:** Porto de movimentação, atualmente limitado a Paranaguá ou Santos.
 
 
 ## Ideias Futuras:
@@ -98,4 +98,4 @@ Adicionar novas métricas ou visualizações nas tabelas existente.
 Expandir relatórios diários.
 
 ## Autor:
-Davi Jordani Ramos
+## Davi Jordani Ramos
