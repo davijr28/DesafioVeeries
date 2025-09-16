@@ -50,19 +50,20 @@ O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, pro
 
 ---
 
-## Execução
-
-### Com Docker
+## Execução do Projeto com Docker:
 1. Build do container:
 ```bash
 docker compose build
 ```
-Rodar o projeto com atualização automática diária:
+2. Rodar o projeto com atualização automática diária:
 
 ```bash
 docker compose up
 ```
 Ao iniciar, o container executa automaticamente os stages Bronze, Silver e Gold, mantendo o histórico dos dados atualizado diariamente.
+
+3. Acessar link no navegador para visualização:
+   - [http://localhost:8000/](http://localhost:8000/) 
 
 ## Validação e Qualidade dos Dados:
 Os dados já são validados nos scripts antes de serem inseridos no banco.
