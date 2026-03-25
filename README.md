@@ -1,7 +1,7 @@
-# Desafio Veeries: Lineup de Navios - ETL Diário de Volumes Portuários
+# Lineup de Navios - ETL Diário de Volumes Portuários 
 
 ## Descrição do Projeto
-Este projeto coleta e atualiza diariamente informações sobre o lineup de navios esperados nos portos de **Paranaguá** e **Santos**. O objetivo é monitorar os **volumes transportados diariamente**, classificados por **produto**, **data**, **volume**, **sentido** (exportação/importação) e **porto**, mantendo o **histórico completo** dos dados.
+Este projeto coleta e atualiza diariamente informações sobre o lineup de navios esperados nos portos de **Paranaguá, PR** e **Santos, SP**. O objetivo é monitorar os **volumes transportados diariamente**, classificados por **produto**, **data**, **volume**, **sentido** (exportação/importação) e **porto**, mantendo o **histórico completo** dos dados.
 
 O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, processados e enriquecidos para análise:
 
@@ -9,13 +9,9 @@ O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, pro
 - **Silver (Prata)**: Dados processados e padronizados.
 - **Gold (Ouro)**: Dados enriquecidos, agregados e prontos para visualização.
 
----
-
 ## Fontes de Dados
 - [Porto de Paranaguá](https://www.appaweb.appa.pr.gov.br/appaweb/pesquisa.aspx?WCI=relLineUpRetroativo)  
 - [Porto de Santos](https://www.portodesantos.com.br/informacoes-operacionais/operacoesportuarias/navegacao-e-movimento-de-navios/navios-esperados-carga/)  
-
----
 
 ## Arquitetura Medallion
 
@@ -35,9 +31,6 @@ O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, pro
   - `gold_volume_diario` em `views.py`
 - Função: Enriquecimento e agregação diária dos volumes, prontos para consumo e visualização.
 
----
-
-
 ## Tecnologias Utilizadas
 - Python 3.x  
 - Django 5.x  
@@ -48,27 +41,24 @@ O fluxo de dados segue a **arquitetura medallion**, garantindo dados brutos, pro
 - Docker + Docker Compose  
 - Execução automatizada via `entrypoint.sh`
 
----
-
 ## Execução do Projeto com Docker:
-1. Build do container:
+**1. Build do container:**
 ```bash
 docker compose build
 ```
-2. Rodar o projeto com atualização automática diária:
-
+**2. Rodar o projeto com atualização automática diária:**
 ```bash
 docker compose up
 ```
 Ao iniciar, o container executa automaticamente os stages Bronze, Silver e Gold, mantendo o histórico dos dados atualizado diariamente.
 
-3. Acessar link no navegador para visualização:
+**3. Acessar link no navegador para visualização:**
    - [http://localhost:8000/](http://localhost:8000/) 
 
 ## Validação e Qualidade dos Dados:
 Os dados já são validados nos scripts antes de serem inseridos no banco.
 
-Dados incompletos ou ausentes são registrados como None.
+Dados incompletos ou ausentes são registrados como `None`.
 
 Histórico é preservado em todas as camadas da arquitetura.
 
@@ -76,17 +66,17 @@ Histórico é preservado em todas as camadas da arquitetura.
 ## Dicionários de Dados:
 Os dados coletados já são padronizados e explicados nas tabelas. A seguir, um resumo das principais colunas e seus valores possíveis:
 
-**- Data:** data de chegada do navio no porto.
+**- Data:** Data de chegada do navio no porto.
 
-**- Produto:** nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
+**- Produto:** Nome do produto transportado pelo navio (ex.: Sal, Milho, Fertilizante, etc.).
 
-**- Sentido:** indica se a operação é de Importação, Exportação ou Importação/Exportação.
+**- Sentido:** Indica se a operação é de Importação, Exportação ou Importação/Exportação.
 
-**- Volume:** quantidade do produto transportada pelo navio no dia, em unidade padronizada(toneladas).
+**- Volume:** Quantidade do produto transportada pelo navio no dia em unidade padronizada (toneladas).
 
-**- Volume Diário Transportado:** o total de carga transportada no dia.
+**- Volume Diário Transportado:** Total de carga transportada no dia.
 
-**- Porto:** Porto de movimentação, atualmente limitado a Paranaguá ou Santos.
+**- Porto:** Indica o porto de movimentação, Paranaguá ou Santos.
 
 
 ## Ideias Futuras:
