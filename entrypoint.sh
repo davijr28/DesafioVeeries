@@ -8,7 +8,7 @@ touch /var/log/daily_job.log
 run_stages() {
     echo "Rodando Bronze e Silver em $(date)" >> /var/log/daily_job.log
     cd /app
-    export DJANGO_SETTINGS_MODULE=DesafioVeeries.settings
+    export DJANGO_SETTINGS_MODULE=etl_volume_portuario.settings
     /usr/local/bin/python manage.py bronze_stage_paranagua >> /var/log/daily_job.log 2>&1
     /usr/local/bin/python manage.py bronze_stage_santos >> /var/log/daily_job.log 2>&1
     /usr/local/bin/python manage.py silver_stage >> /var/log/daily_job.log 2>&1

@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=DesafioVeeries.settings
+      - DJANGO_SETTINGS_MODULE=etl_volume_portuario.settings
     restart: always
 
   daily_cron:

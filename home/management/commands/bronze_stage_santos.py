@@ -51,6 +51,6 @@ class Command(BaseCommand):
                         sentido=sentido,
                         porto="Porto de Santos",
                     )
-                    
+
         # Exibe mensagem de sucesso no terminal
         self.stdout.write(self.style.SUCCESS("Importação concluída!"))
